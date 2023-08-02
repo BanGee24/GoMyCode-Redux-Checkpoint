@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+// App.js
+import React from 'react';
 import './App.css';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import tasksReducer from './redux/reducers'; // Importing the tasksReducer.
+import AddTask from './components/Addtask'; // Importing the AddTask component.
+import ListTask from './components/ListTask'; // Importing the ListTask component.
 
-function App() {
+const store = createStore(tasksReducer); // Creating the Redux store with the tasksReducer.
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}> {/* Providing the Redux store to the entire application */}
+      <div style={{  background: 'linear-gradient(to left, #818cf8, #ddd6fe)', margin: '45px', height: '40rem', padding: '2px 50px 60px 36rem'}}>
+        <h1>Todo List App</h1>
+        <AddTask />
+        <ListTask />
+      </div>
+    </Provider>
   );
-}
+};
 
 export default App;
